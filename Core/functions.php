@@ -62,3 +62,24 @@ function generateRandomString($length = 16) {
     return $randomString;
 }
 
+function login($arr)
+{
+    $_SESSION["logging_in"]=true;
+    $_SESSION["user_info"]=[
+        "email"=>$arr["email"]??null,
+        "username" =>$arr["username"]??null,
+        "userid"=>$arr["id"]??null
+    ];
+
+    session_regenerate_id(true);    //to not let user reuse the cocke saved in the serever
+}
+
+function logout()
+{
+    $_SESSION=[];
+session_destroy();
+
+$params=session_get_cookie_params();
+setcookie("PHPSESSID","", time()- 3600, $params['path'], $params['domain'], $params['secure '], $params['httponly']);
+
+}

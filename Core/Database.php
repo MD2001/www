@@ -14,7 +14,7 @@ class DataBase
     {
 
         $dsn = "mysql:" . http_build_query($config, '', ';');
-        $this->pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE]);
+        $this->pdo = new PDO($dsn, $username, $password, [PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION]);
     }
 
     protected static function abort($code = 404)
@@ -34,16 +34,16 @@ class DataBase
 
     public function findall()
     {
-        return $this->statment->fetchAll();
+        return $this->statment->fetchAll(PDO::FETCH_ASSOC);
     }
     public function find()
     {
-        return $this->statment->fetch();
+        return $this->statment->fetch(PDO::FETCH_ASSOC);
     }
 
     public function findallOrFail()
     {
-        $result = $this->statment->fetchAll();
+        $result = $this->statment->fetchAll(PDO::FETCH_ASSOC);
 
         if (!$result) {
             abort(Response::NOT_FOUND);
@@ -53,7 +53,7 @@ class DataBase
     }
     public function findOrFail()
     {
-        $result = $this->statment->fetch();
+        $result = $this->statment->fetch(PDO::FETCH_ASSOC);
         
         if (!$result) {
             abort(Response::NOT_FOUND);

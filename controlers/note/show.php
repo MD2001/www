@@ -11,8 +11,8 @@ $notes = $db->query('select * from post where  id= :id', [
     'id' => $_GET["id"]
 ])->findOrFail();
 
-
-athrauzation($notes['user_id'] === 1);
+$id= $_SESSION["user_info"]["userid"]??null;
+athrauzation($notes['user_id'] ===$id );
 
 
 view("note/note.view.php",[

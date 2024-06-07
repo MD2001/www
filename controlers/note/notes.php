@@ -7,10 +7,13 @@ $config=base_path_requier('Config.php');
 
 $db= new DataBase($config['database']);
 
-$id=array_key_exists("id",$_GET) ? $_GET["id"] : 1 ;        // this line for test the code without error
+// $id=array_key_exists("id",$_GET) ? $_GET["id"] : 18 ;        // this line for test the code without error
 
-$notes=$db->query('select * from post where user_id= :id',['id'=>$id])->findall();
+$id= $_SESSION["user_info"]["userid"]??null;
 
+$notes=$db->query('select * from post where user_id= :id',[
+    'id'=> $id
+    ])->findall();
 
 
 view("note/notes.view.php",[

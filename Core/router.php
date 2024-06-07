@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\Middleware\Middleware;
+
 class Router
 {
 
@@ -11,7 +13,7 @@ class Router
     {
         return $this->routes;
     }
-    protected function add($uri, $controller,$mode)
+    protected function add($uri, $controller, $mode)
     {
         $this->routes[] = [
             "uri" => $uri,
@@ -25,45 +27,47 @@ class Router
 
     public function get($uri, $controller)
     {
-       return $this->add($uri,$controller,"GET");
+        return $this->add($uri, $controller, "GET");
     }
     public function post($uri, $controller)
     {
-       return $this->add($uri,$controller,"POST");
+        return $this->add($uri, $controller, "POST");
     }
     public function delete($uri, $controller)
     {
-       return $this->add($uri,$controller,"DELETE");
+        return $this->add($uri, $controller, "DELETE");
     }
     public function put($uri, $controller)
     {
-       return $this->add($uri,$controller,"PUT");
+        return $this->add($uri, $controller, "PUT");
     }
 
     public function patch($uri, $controller)
     {
-       return $this->add($uri,$controller,"PATCH");
+        return $this->add($uri, $controller, "PATCH");
     }
 
     public function only($key)
     {
-        $this->routes[array_key_last($this->routes)]["middleware"]=$key;
+        $this->routes[array_key_last($this->routes)]["middleware"] = $key;
 
-        return $this ; //to be able to chain ferther
+        return $this; //to be able to chain ferther
     }
 
-    public function rout($uri,$method)
+    public function rout($uri, $method)
     {
-        foreach($this->routes as $rout)
-        {
-            if($rout['uri']===$uri && $rout["method"]=== strtoupper($method))
-            {
+        foreach ($this->routes as $rout) {
+            if ($rout['uri'] === $uri && $rout["method"] === strtoupper($method)) {
+
+
+                Middleware::resolve($rout["middleware"]);
+
+
                 return require base_path($rout["controller"]);
             }
-            
         }
 
-       $this-> abort();
+        $this->abort();
     }
 
 
@@ -74,5 +78,3 @@ class Router
         die();
     }
 }
-
-

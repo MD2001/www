@@ -8,6 +8,8 @@ use Core\App;
 
 // $db = new DataBase($config['database']);
 
+$id= $_SESSION["user_info"]["userid"]??null;
+
 $db = App::getContainer()->resolve(\Core\Database::class);
 
 
@@ -16,7 +18,7 @@ $db = App::getContainer()->resolve(\Core\Database::class);
     ])->findOrFail();
 
 
-    athrauzation($notes['user_id'] ===1);
+    athrauzation($notes['user_id'] ===$id);
     
     $notes = $db->query('DELETE from post where  id= :id', [
         'id' => $_POST["id"]
