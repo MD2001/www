@@ -2,28 +2,28 @@
 
 
 
-$router ->get('/',"controlers/Home.php");
-$router ->get("/about","controlers/about.php");
-$router ->get("/contact","controlers/contact.php");
+$router ->get('/',"Home.php");
+$router ->get("/about","about.php");
+$router ->get("/contact","contact.php");
 
-// $router ->get("/note","controlers/note/destroy.php");
-$router ->delete("/note","controlers/note/destroy.php");
+// $router ->get("/note","note/destroy.php");
+$router ->delete("/note","note/destroy.php")->only("auth");
 
-$router ->get("/note/create","controlers/note/create-note.php");
-$router ->post("/note/create","controlers/note/create-note.php");
+$router ->get("/note/create","note/create-note.php")->only("auth");
+$router ->post("/note/create","note/create-note.php")->only("auth");
 
-$router ->get("/notes", "controlers/note/notes.php")->only("auth");
-$router ->post("/store", "controlers/note/store.php");
+$router ->get("/notes", "note/notes.php")->only("auth");
+$router ->post("/store", "note/store.php")->only("auth");
 
-$router ->get("/show", "controlers/note/show.php");
+$router ->get("/show", "note/show.php")->only("auth");
 
-$router ->get("/registeration", "controlers/Resgisteration/Create.php")->only("gest");
-$router ->post("/registeration", "controlers/Resgisteration/Store.php")->only("gest");
+$router ->get("/registeration", "Resgisteration/Create.php")->only("gest");
+$router ->post("/registeration", "Resgisteration/Store.php")->only("gest");
 
 
-$router->get("/Login","controlers/Login/Login.php")->only("gest");
-$router->post("/sesstion/create","controlers/Login/sessionCreate.php")->only("gest");
+$router->get("/Login","Login/Login.php")->only("gest");
+$router->post("/sesstion/create","Login/sessionCreate.php")->only("gest");
 
-$router->delete("/session","controlers/Login/destroy.php")->only("auth");
+$router->delete("/session","Login/destroy.php")->only("auth");
 
-// $router ->delete("/note","controlers/note/create-note.php");
+// $router ->delete("/note","note/create-note.php");
