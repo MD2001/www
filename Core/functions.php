@@ -1,0 +1,64 @@
+<?php
+
+use Core\Response;
+
+function abort($code = 404)
+{
+    http_response_code($code);
+    require base_path("Views/{$code}.php");
+    die();
+}
+
+function dd ($Copy_var)
+{
+
+    echo "<pre>";
+    var_dump($Copy_var);
+    echo "</pre>";
+    die();
+
+}
+
+function urlis($url)
+{
+    return $_SERVER["REQUEST_URI"]=== $url;
+}
+
+
+function athrauzation($cindition,$states=Response::UNOTHRAIZED)
+{
+    if(!$cindition){
+
+        abort($states);
+    }
+}
+
+function base_path($path)
+{
+    return BaseBase.$path;
+}
+function view($path,$arrtipute=[])
+{
+    extract($arrtipute);
+    require  base_path("Views/" . $path );
+}
+
+function base_path_requier($path)
+{
+    return require  base_path($path);
+}
+
+function generateRandomString($length = 16) {
+    // Define character set
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    
+    for ($i = 0; $i < $length; $i++) {
+        // Append a random character from the character set
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    
+    return $randomString;
+}
+
