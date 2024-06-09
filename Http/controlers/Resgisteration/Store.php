@@ -1,6 +1,6 @@
 <?php
 
-
+use Core\Session;
 use Http\Forms\LoginForms;
 use Http\Forms\Registeration;
 
@@ -11,7 +11,7 @@ $form = new LoginForms();
 
 if (!$form->Validator($email, $password)) {
  
-  $_SESSION["_flash"]["error"]=$form->errors();
+  Session::flash("error",$form->errors());
   redirect("/registeration");
 }
 

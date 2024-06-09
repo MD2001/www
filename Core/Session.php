@@ -10,7 +10,7 @@ class Session
     } 
     public static function get($key,$defult=null)
     {
-       return $_SESSION[$key]?? $defult;
+       return $_SESSION["_flash"][$key] ?? $_SESSION[$key] ?? $defult;
     } 
     public static function have($key)
     {
