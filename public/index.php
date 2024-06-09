@@ -32,3 +32,4 @@ $method=$_POST["_method"] ?? $_SERVER["REQUEST_METHOD"];
 
 $router->rout($uri,$method);
 
+unset($_SESSION["_flash"]);
