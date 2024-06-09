@@ -1,5 +1,6 @@
 <?php
 
+var_dump("you have been posted");
 
 use Http\Forms\LoginForms;
 use Http\Forms\Registeration;
