@@ -91,7 +91,7 @@ function setold($key,$value)
     return Session::flash($key,$value);
 }
 
-function getold($key)
+function getold($key,$defult="")
 {
-    return Session::get($key);
+    return Session::get($key,$defult);
 }

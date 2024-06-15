@@ -21,6 +21,7 @@ if (!Validator::string($password)) {
 
 
 if (!empty($error)) {
+    setold("email",$email);
     return view(
         "Login/Login.view.php",
         ["error" => $error]
@@ -51,6 +52,8 @@ if(!password_verify($password,$user["password"]))
             ["password" => "No muching password for this email"]
         ]);
 }
+
+
 
 login([
     "email"=>$email,

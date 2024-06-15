@@ -12,6 +12,7 @@ $form = new LoginForms();
 if (!$form->Validator($email, $password)) {
  
   Session::flash("error",$form->errors());
+  Session::flash("email",$email);
   redirect("/registeration");
 }
 
