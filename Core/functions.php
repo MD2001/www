@@ -85,3 +85,13 @@ function redirect($location = "/")
     header("Location: {$location}");
     exit();
 }
+
+function setold($key,$value)
+{
+    return Session::flash($key,$value);
+}
+
+function getold($key)
+{
+    return Session::get($key);
+}
