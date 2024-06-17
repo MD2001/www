@@ -9,12 +9,15 @@ const BaseBase = __DIR__ . '/../';
 
 require BaseBase."Core/functions.php";
 
-spl_autoload_register(function($class)
-{
-    $class=str_replace('\\','/',$class);
-    require base_path("{$class}.php");
+// spl_autoload_register(function($class)
+// {
+//     $class=str_replace('\\','/',$class);
+//     require base_path("{$class}.php");
     
-});
+// });
+
+require BaseBase . "/vendor/autoload.php";
+
 $router =new \Core\Router();
 require base_path('bootsrap.php');
 
